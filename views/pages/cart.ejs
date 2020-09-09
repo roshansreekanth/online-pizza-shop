@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../partials/head.ejs %>
+
+<style>
+    .custab{
+        border: 1px solid #ccc;
+        padding: 5px;
+        margin: 5% 0;
+        box-shadow: 3px 3px 2px #ccc;
+        transition: 0.5s;
+    }
+    .custab:hover{
+        box-shadow: 3px 3px 0px transparent;
+        transition: 0.5s;
+    }
+</style>
+
+
+<body class="container">
+    <% include ../partials/menu.ejs %>
+
+    <div class="container">
+        <div class="row col-md-6 col-md-offset-2 custyle">
+            <h2 style="text-align: center">Pizzas Ordered</h2>
+            <table class="table table-striped custab">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Size</th>
+                    <th>Crust</th>
+                    <th>Extra Cheese</th>
+                    <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                <%orderedPizzas.forEach((pizza)=>{%>
+                <tr>
+                    <td><%=pizza.itemName%></td>
+                    <td><%=pizza.quantity%></td>
+                    <td><%=pizza.price%></td>
+                    <td><%=pizza.size%></td>
+                    <td><%=pizza.crust%></td>
+                    <td><%=pizza.extraCheese%></td>
+
+                    <td class="text-center">
+                        <form method="POST">
+                            <input type="hidden" value="<%=pizza.customerId%>" name="customerId">
+                            <input type="hidden" value="<%=pizza.itemId%>" name="itemId">
+                            <input type="hidden" value="<%=pizza.quantity%>" name="quantity">
+                            <input type="hidden" value="<%=pizza.price%>" name="price">
+                            <input type="hidden" value="<%=pizza.size%>" name="size">
+                            <input type="hidden" value="<%=pizza.crust%>" name="crust">
+                            <input type="hidden" value="<%=pizza.extraCheese%>" name="extraCheese">
+                            <input type="hidden" value="<%=pizza.itemName%>" name="itemName">
+                            <button style="background-color: darkred; border: none;" type="submit" class="glyphicon glyphicon-remove"></button>
+                        </form>
+                    </td>
+                </tr>
+                <%});%>
+            </table>
+
+            <table class="table table-striped custab">
+                <h2 style="text-align: center">Other Items Ordered</h2>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                <%orderedNonPizzas.forEach((item)=>{%>
+                <tr>
+                    <td><%=item.itemName%></td>
+                    <td><%=item.quantity%></td>
+                    <td><%=item.price%></td>
+                    <td class="text-center">
+                        <form method="POST">
+                            <input type="hidden" value="<%=item.itemId%>" name="itemId">
+                            <input type="hidden" value="<%=item.customerId%>" name="customerId">
+                            <input type="hidden" value="<%=item.quantity%>" name="quantity">
+                            <input type="hidden" value="<%=item.price%>" name="price">
+                            <input type="hidden" value="<%=item.size%>" name="size">
+                            <input type="hidden" value="<%=item.crust%>" name="crust">
+                            <input type="hidden" value="<%=item.extraCheese%>" name="extraCheese">
+                            <input type="hidden" value="<%=item.itemName%>" name="itemName">
+                            <button style="background-color: darkred; border: none;" type="submit" class="glyphicon glyphicon-remove"></button>
+                        </form>
+                    </td>
+                </tr>
+                <%});%>
+            </table>
+
+        </div>
+
+    </div>
+    <h2 style="text-align: center"><strong>Total: </strong><span>€<%= grandTotal %></span></h2>
+    <div style="text-align: center">
+    <%if(grandTotal > 0){%>
+        <p style="text-align: center; margin-top: 20px; display: block;">
+            <a href="http://localhost:3000/confirm" style="color: inherit">
+                <button type="button" >Confirm Order</button>
+            </a>
+        </p>
+    <%}%>
+    </div>
+</body>

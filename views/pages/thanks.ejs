@@ -1,0 +1,27 @@
+<!-- views/pages/about.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<% include ../partials/head.ejs %>
+
+<body class="container">
+<% include ../partials/menu.ejs %>
+
+<main>
+    <div class="container">
+
+        <div class="jumbotron">
+
+            <h1>Your order has been placed!</h1>
+            <p>It will be delivered in 30 minutes</p>
+
+            <form method = "POST">
+                <button type="submit">Confirm</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<% include ../partials/footer.ejs %>
+</body>
+</html>

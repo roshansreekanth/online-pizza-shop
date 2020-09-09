@@ -1,0 +1,34 @@
+<!-- views/pages/about.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<% include ../partials/head.ejs %>
+
+<body class="container">
+<% include ../partials/menu.ejs %>
+
+<main>
+    <div class="container">
+
+            <div class="jumbotron">
+
+                <h1>Before you complete your order...</h1>
+                <h3>Your total is €<%=total%>. How would you like to pay?</h3>
+
+                <form method = "POST">
+                    <input type="radio" name="paymentMethod" value="CASH" required>Cash
+                    <input type="radio" name="paymentMethod" value="CARD">Card<br>
+
+                    <p>How would you like the food delivered?</p>
+
+                    <input type="radio" name="deliveryMode" value="COLLECTION" required>Collection
+                    <input type="radio" name="deliveryMode" value="HOME">Home Delivery<br>
+                    <button type="submit">Continue</button>
+                </form>
+            </div>
+    </div>
+</main>
+
+<% include ../partials/footer.ejs %>
+</body>
+</html>

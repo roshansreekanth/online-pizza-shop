@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../partials/head.ejs %>
+
+<body class="container">
+<% include ../partials/menu.ejs %>
+
+<main>
+    <form class="form-horizontal" method="POST">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Enter your card details</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cardNumber">Card Number</label>
+                <div class="col-md-4">
+                    <input id="cardNumber" name="cardNumber" type="text" placeholder="Enter card number" class="form-control input-md" required="">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cardDate">Expiry Date</label>
+                <div class="col-md-4">
+                    <input id="cardDate" name="cardDate" type="text" placeholder="dd/mm/yy" class="form-control input-md" required="">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cvv">CVV (if required)</label>
+                <div class="col-md-4">
+                    <input id="cvv" name="cvv" type="text" placeholder="Enter 3 digit CVV" class="form-control input-md">
+
+                </div>
+                <button type="submit" style="text-align: center; display: block;">Submit Details</button>
+
+            </div>
+        </fieldset>
+    </form>
+</main>
+
+<% include ../partials/footer.ejs %>
+</body>

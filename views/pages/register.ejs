@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<% include ../partials/head.ejs %>
+
+<body class="container">
+<% include ../partials/menu.ejs %>
+<h1> Create an Account</h1>
+<main>
+    <div class="register" style="border: 5px solid orange; text-align: left;">
+        <form action="register" method="post" id="newUserForm">
+            <label for="email"><b>Enter Email</b></label>
+            <input type="text" placeholder="Enter email" name="email" required style = "margin-bottom: 20px;">
+            <br>
+
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required style = "margin-bottom: 20px;">
+            <br>
+
+            <label for="name"><b>Name</b></label>
+            <input type="text" placeholder="Enter Name" name="name" required style = "margin-bottom: 20px;">
+            <br>
+
+            <label for="address"><b>Address</b></label>
+            <textarea rows="4" cols="50" name="address" form="newUserForm" placeholder="Enter address here"></textarea>
+            <br>
+
+            <label for="phone"><b>Phone No.</b></label>
+            <input type="text" placeholder="Enter your number" name="phone" required style = "margin-bottom: 8px;">
+            <br>
+
+            <button type="submit" style="text-align: center">Create Account</button>
+
+
+        </form>
+
+    </div>
+</main>
+
+<% include ../partials/footer.ejs %>
+</body>
+</html>

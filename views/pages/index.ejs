@@ -1,0 +1,77 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <% include ../partials/head.ejs %>
+
+    <body class="container">
+        <% include ../partials/menu.ejs %>
+
+        <h1 style="text-align: center; border: 5px solid orange">Welcome, <%=customer.name%></h1>
+        <div>
+            <h2 style="text-align: center"><strong>Menu</strong></h2>
+        </div>
+
+        <h3 style="text-align: center; border: 5px solid white"><strong>Pizzas</strong></h3>
+
+        <p style="text-align: center; padding: 20px"><a href="http://localhost:3000/create"><button type= "button" style="width: 100%; background-color: black">Create a Pizza</button></a></p>
+
+        <main>
+           <div class="jumbotron">
+               <br>
+               <div class = "pizza">
+               <% pizzas.forEach(function(pizza) { %>
+                   <img src = "http://localhost:3001/public/img/<%=pizza.name%>.jpg" alt = "Pizza"  onerror="this.onerror = null; this.src = 'http://localhost:3001/public/img/Custom.jpg';">
+                   <p><strong><%= pizza.name %></strong> €<span id="price"><%= pizza.price %></span></p>
+                   <span><strong>Ingredients: </strong></span>
+                       <%for(let ingredient of pizza.ingredients){%>
+                       <span><small><%=" | " + ingredient.name + " | "%></small></span>
+                           <%}%>
+                   <form method = "POST" style="margin-bottom: 20px;">
+                       <input name="itemId" type="hidden" value="<%= pizza.pizzaId%>">
+                       Quantity:
+                       <input type="number" name="quantity" min="1" max="50" value="1">
+                       Size:
+                       <select name="size">
+                           <option value="SMALL">Small</option>
+                           <option value="MEDIUM">Medium</option>
+                           <option value="LARGE">Large</option>
+                       </select>
+                       Crust:
+                       <select name="crust">
+                           <option value="MEDIUM">Medium</option>
+                           <option value="THIN">Thin</option>
+                       </select>
+                       Extra Cheese:
+                       <select name="extraCheese">
+                           <option value="N">No</option>
+                           <option value="Y">Yes</option>
+                       </select>
+                       <button type="submit">Add</button>
+                   </form>
+
+               <% }); %>
+           </div>
+           </div>
+
+            <h3 style="text-align: center; border: 5px solid grey"><strong>Other Items</strong></h3>
+
+            <div class="jumbotron">
+                   <% nonPizzas.forEach(function(item) { %>
+                <p><img src = "http://localhost:3001/public/img/<%=item.name%>.jpg" alt = "Side item" height = "100" width = "100"></p>
+                   <p><strong><%= item.name %></strong> €<%= item.price %></p>
+                <form method="POST" style="margin-bottom: 30px;">
+                    <input name="itemId" type="hidden" value="<%= item.nonPizzaId%>">
+                    Quantity:
+                    <input type="number" name="quantity" min="0" max="100" step="1" value="1">
+                    <button type="submit">Add</button>
+                </form>
+
+                <% }); %>
+            </div>
+        </main>
+
+       <% include ../partials/footer.ejs %>
+    </body>
+</html>

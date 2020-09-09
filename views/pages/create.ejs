@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<% include ../partials/head.ejs %>
+
+<body class="container">
+<% include ../partials/menu.ejs %>
+<script>
+    let total = 7.0;
+    let counter = 1;
+    function update(item) {
+
+        let extra = counter - 2;
+        item.checked === true ? counter ++ : counter--;
+        if(extra > 0 && item.checked === true)
+        {
+            total += 0.5;
+        }
+        else if(extra <= 0)
+        {
+            total = 7.0;
+        }
+        else if(counter > 2)
+        {
+            total -= 0.5;
+        }
+        document.getElementById('total').value = "€" + total;
+    }
+</script>
+<main>
+
+
+    <form class="form-horizontal" method="POST">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Create a Pizza</legend>
+
+            <div style="text-align: center">
+                <p><strong>Base Price: €7</strong></p>
+                <p>2 Ingredients : Included</p>
+                <p>Any extra ingredients : €0.50</p>
+            </div>
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="sauce">Sauce</label>
+                <div class="col-md-4">
+                    <select id="sauce" name="sauce" class="form-control">
+                        <option value="Tomato">TOMATO</option>
+                        <option value="Marinara">MARINARA</option>
+                        <option value="Ranch">RANCH</option>
+                        <option value="Tabasco">TABASCO</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Pizza Name</label>
+                <div class="col-md-4">
+                    <input id="name" name="name" type="text" placeholder="Enter the name of your pizza" class="form-control input-md" required="">
+
+                </div>
+            </div>
+            <p style="text-align: center"><strong>Total: </strong><input id="total" name="total" type="text" value="€7" readonly></p>
+            <!-- Multiple Checkboxes -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="checkboxes">Ingredients</label>
+                <div class="col-md-4">
+                    <div class="checkbox">
+                        <% ingredients.forEach(function(ingredient) { %>
+<!--                        <img src = "http://localhost:3001/public/img/veg.jpg" alt = "Side item" height = "100" width = "100">-->
+                            <p><label>
+                                <input type="checkbox" name="ingredients" value="<%=ingredient.name%>" onchange="update(this);">
+                                <%=ingredient.name%>
+                                    <%if(ingredient.type === "V"){%>
+                                        <span><img src="http://localhost:3001/public/img/vegetarian.png" height="20" width="20" alt=" Vegetarian"> </span>
+                                    <%}%>
+                                    €0.5
+                                </label></p>
+                        <% }); %>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <p><button type= "submit" style="text-align: center; margin: auto;display: block" >Create</button></p>
+    </form>
+
+</main>
+
+<% include ../partials/footer.ejs %>
+</body>
+</html>
